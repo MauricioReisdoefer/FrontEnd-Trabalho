@@ -14,6 +14,6 @@
 
 <script>
 export default {
-  name: 'sidebar'
+  name: 'v-sidebar'
 }
 </script>

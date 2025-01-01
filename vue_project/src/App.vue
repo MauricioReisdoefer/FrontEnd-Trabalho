@@ -1,11 +1,10 @@
 <template>
   <v-app>
-    <!-- Barra de navegação ou qualquer outro componente pode ir aqui -->
+    <vHeader></vHeader>
     <v-main>
-      <Sidebar></Sidebar>
+      <vSidebar></vSidebar>
       <v-container>
-        <h1>Bem-vindo ao Vuetify!</h1>
-        <p>Esta é a sua aplicação Vue com Vuetify.</p>
+        <router-view></router-view>
       </v-container>
     </v-main>
   </v-app>
@@ -13,12 +12,14 @@
 
 
 <script>
-import Sidebar from './components/sidebar.vue';
+import vSidebar from './components/sidebar.vue';
+import vHeader from './components/header.vue'
 
 export default {
   name: 'App',
   components: {
-    Sidebar
+    vSidebar,
+    vHeader
   }
 }
 </script>
