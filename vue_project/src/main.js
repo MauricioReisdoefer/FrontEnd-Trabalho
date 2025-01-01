@@ -8,8 +8,7 @@ loadFonts()
 
 createApp(App)
   .use(vuetify)
+  .use(router)
   .mount('#app')
 
 Vue.config.productionTip = false
-Vue.use(router);
-app.mount('#app');
