@@ -1,6 +1,6 @@
 <template>
-    <h1>Bem-vindo ao Vuetify!</h1>
-    <p>Esta é a sua aplicação Vue com Vuetify.</p>
+    <h1>Bem-vindo ao Fórum!</h1>
+    <p>Você está no fórum.</p>
 </template>
 
 <script>
