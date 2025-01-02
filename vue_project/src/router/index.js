@@ -4,7 +4,7 @@ import Home from '../components/home.vue'
 import Topics from '../components/TopicComps/topics.vue'
 import Register from '../components/UserComps/register.vue'
 import Login from '../components/UserComps/login.vue'
-import CreateTopic from '../components/TopicComp/create.topic.vue'
+import CreateTopic from '../components/TopicComps/create.topic.vue'
 import ManageAccount from '../components/UserComps/manageAccount.vue'
 
 const routes = [
