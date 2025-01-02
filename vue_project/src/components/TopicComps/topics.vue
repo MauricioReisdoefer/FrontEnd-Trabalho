@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 
   name: 'v-topics',
@@ -53,18 +54,26 @@ export default {
       components: {
       },
       topics: [
-        { title: 'O que é DevOps?', description: 'Quais são os principais benefícios de implementar DevOps em uma equipe de desenvolvimento?', user: "João Silva" },
-        { title: 'Como funciona o Git?', description: 'Estou aprendendo Git e não entendi bem como utilizar branches no repositório.', user: "Maria Oliveira" },
-        { title: 'Por que usar TypeScript?', description: 'Estou em dúvida se vale a pena investir em TypeScript para projetos de grande escala.', user: "Carlos Souza" },
-        { title: 'O que é uma API REST?', description: 'Quais as principais diferenças entre REST e SOAP, e qual deles é mais adequado para apps móveis?', user: "Ana Costa" },
-        { title: 'Como aprender Python?', description: 'Quais são os melhores recursos para aprender Python do zero e começar a desenvolver?', user: "Felipe Mendes" }
+        { title: 'O que é DevOps?', description: 'Quais são os principais benefícios de implementar DevOps em uma equipe de desenvolvimento?', user: "João Silva", id: 1 },
+        { title: 'Como funciona o Git?', description: 'Estou aprendendo Git e não entendi bem como utilizar branches no repositório.', user: "Maria Oliveira", id: 2 },
+        { title: 'Por que usar TypeScript?', description: 'Estou em dúvida se vale a pena investir em TypeScript para projetos de grande escala.', user: "Carlos Souza", id: 3  },
+        { title: 'O que é uma API REST?', description: 'Quais as principais diferenças entre REST e SOAP, e qual deles é mais adequado para apps móveis?', user: "Ana Costa", id: 4  },
+        { title: 'Como aprender Python?', description: 'Quais são os melhores recursos para aprender Python do zero e começar a desenvolver?', user: "Felipe Mendes", id: 5  }
 ]
 
     };
   },
   methods: {
     viewTopic(index) {
-      alert(`Você clicou no tópico: ${this.topics[index].title}`);
+      const topicId = this.topics[index].id;
+      axios.get(`/Topic/GetTopic/${topicId}`)
+      .then(response => {
+        alert(`Tópico: ${response.data.topicname}\nDescrição: ${response.data.description}`);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar o tópico:', error);
+        alert('Erro ao carregar o tópico.', error);
+      });
     },
   },
 };
