@@ -14,7 +14,7 @@
       <v-col cols="12" md="8" class="text-center">
         <v-btn
           large
-          style="background-color: #90ee80; color: white;"
+          style="background-color: #90ea00; color: white;"
           to="/createTopic"
         >
           Criar Novo Tópico
@@ -34,7 +34,7 @@
               </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn small text color="primary" @click="viewTopic(index)">Ver</v-btn>
+              <v-btn small @click="viewTopic(index)">Ver</v-btn>
               <v-list-item-subtitle class="mb-1 custom-margin-left">{{ topic.user }}</v-list-item-subtitle>
             </v-list-item-action>
           </v-list-item>
@@ -46,9 +46,12 @@
 
 <script>
 export default {
+
   name: 'v-topics',
   data() {
     return {
+      components: {
+      },
       topics: [
         { title: 'O que é DevOps?', description: 'Quais são os principais benefícios de implementar DevOps em uma equipe de desenvolvimento?', user: "João Silva" },
         { title: 'Como funciona o Git?', description: 'Estou aprendendo Git e não entendi bem como utilizar branches no repositório.', user: "Maria Oliveira" },

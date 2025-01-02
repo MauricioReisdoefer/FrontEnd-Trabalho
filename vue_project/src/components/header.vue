@@ -8,7 +8,7 @@
     <v-btn to="/login" text>Login</v-btn>
 
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <v-btn icon to="/manage">
       <v-icon>mdi-account</v-icon>
     </v-btn>
   </v-app-bar>
