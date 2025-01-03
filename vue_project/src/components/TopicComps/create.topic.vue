@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'v-create-topic',
   data() {
@@ -58,14 +59,24 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      console.log('Título do Tópico:', this.TopicTitle);
-      console.log('Descrição do Tópico:', this.TopicDescription);
-
-      alert(`Título do Tópico: ${this.TopicTitle}\nDescrição do Tópico: ${this.TopicDescription}`);
-    }
+  submitForm() {
+    axios.post(`/Topic/CreateTopic`, {
+        title_: this.TopicTitle,
+        text_: this.TopicDescription
+        }, {
+          headers: {
+            Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTczNTkyNTIzNH0.6MvccqdVQJJ3ODe1FghZV8OtnbbsM85YQ966Ytdw_Jg'
+        }
+        })
+        .then(response => {
+          alert('Topic Created', response);
+        })
+        .catch(error => {
+          alert('Fuck me', error)
+        })
+      }
   }
-};
+}
 </script>
 
 <style scoped>

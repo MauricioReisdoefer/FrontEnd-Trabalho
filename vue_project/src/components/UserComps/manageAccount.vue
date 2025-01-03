@@ -107,7 +107,7 @@
                   username_: this.username_,
                   email_: this.email_
                   }, {
-                    eaders: {
+                    headers: {
                       Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsImlhdCI6MTczNTg3NjUzOX0.EMe4Oqu-epxtmIx7nGi13L6cOCRTiLgSmUENOEzI9w8'
                   }
                   })

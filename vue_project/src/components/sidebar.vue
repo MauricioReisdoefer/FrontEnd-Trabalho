@@ -1,7 +1,8 @@
 <template>
     <v-navigation-drawer
     expand-on-hover
-        rail>
+        rail
+        >
         <v-list>
             <v-list-item title="Meus Tópicos" subtitle="Maurício Reisdoefer"></v-list-item>
             <v-divider></v-divider>
@@ -14,6 +15,6 @@
 
 <script>
 export default {
-  name: 'v-sidebar'
+  name: 'v-sidebar',
 }
 </script>
