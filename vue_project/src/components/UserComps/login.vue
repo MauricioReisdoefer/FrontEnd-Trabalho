@@ -1,11 +1,17 @@
 <template>
-    <v-sheet class="mx-auto" width="300">
-    <h1 class="text-center mb-4">Entrar na Conta</h1>
-    <v-form fast-fail @submit.prevent="submitForm">
+    <v-sheet
+      height="100%"
+      class="mx-auto pa-6 rounded-lg elevation-2" 
+      tile
+    >
+      <h1 class="text-h5 font-weight-bold mb-4">Entrar na Conta</h1>
+      <v-form fast-fail @submit.prevent>
         <v-text-field
           v-model="Username"
           :rules="UsernameRules"
           label="Username"
+          outlined
+          dense
         ></v-text-field>
 
         <v-text-field
@@ -13,11 +19,13 @@
           :rules="PasswordRules"
           label="Password"
           type="password"
+          outlined
+          dense
         ></v-text-field>
-  
-        <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-    </v-form>
-  </v-sheet>
+        
+        <v-btn class="mt-4 mb-10" type="submit" block color="primary">Submit</v-btn>
+      </v-form>
+    </v-sheet>
 </template>
 
 <script>

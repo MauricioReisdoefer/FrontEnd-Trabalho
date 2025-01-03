@@ -2,18 +2,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/home.vue'
 import Topics from '../components/TopicComps/topics.vue'
-import Register from '../components/UserComps/register.vue'
-import Login from '../components/UserComps/login.vue'
 import CreateTopic from '../components/TopicComps/create.topic.vue'
 import ManageAccount from '../components/UserComps/manageAccount.vue'
+import regsLog from '../components/UserComps/regs-log.vue'
 
 const routes = [
   { path: '/', component: Home, name: "home" },
   { path: '/topics', component: Topics, name: 'topics' },
-  { path: '/register', component: Register, name: 'register' },
   { path: '/createTopic', component: CreateTopic, name: 'createTopic'},
-  { path: '/login', component: Login, name: 'login'},
-  { path: '/manage', component: ManageAccount, name: 'manageAccount'}
+  { path: '/manage', component: ManageAccount, name: 'manageAccount'},
+  { path: '/regslog', component: regsLog, name: 'regsLog'}
 ]
 
 const router = createRouter({
