@@ -12,9 +12,9 @@
             class="mx-auto pa-6 rounded-lg elevation-2" 
             tile>
             <h1 class="text-h5 font-weight-bold mb-4">Criar Conta</h1>
-            <v-form fast-fail @submit.prevent>
+            <v-form fast-fail @submit.prevent="createUser">
                 <v-text-field
-                v-model="Username"
+                v-model="username_"
                 :rules="UsernameRules"
                 label="Username"
                 outlined
@@ -22,7 +22,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                v-model="Email"
+                v-model="email_"
                 :rules="EmailRules"
                 label="Email"
                 outlined
@@ -30,7 +30,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                v-model="Password"
+                v-model="password_"
                 :rules="PasswordRules"
                 label="Password"
                 type="password"
@@ -39,7 +39,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                v-model="PasswordConf"
+                v-model="passwordConf_"
                 :rules="PasswordConfRules"
                 label="Confirm Password"
                 type="password"
@@ -85,15 +85,29 @@
   </template>
   
   <script>
-    import login from './login.vue';
-    import Register from './register.vue';
-  
+  import axios from 'axios'
   export default {
     name: 'v-regis-login-page',
-    components: [
-      login,
-      Register
-    ],
+    data(){
+      return{
+        username_: '',
+        password_: '',
+        email_: '',
+        passwordConf_: '',
+      }
+    },
+
+    methods: {
+      createUser(){
+          axios.post('/User/CreateUser', this.formData)
+          .then(response =>{
+            alert('Foi')
+          })
+          .catch(error =>{
+            alert('Não foi')
+          })
+      }
+    },
     data() {
       return {
         activeTab: 0
