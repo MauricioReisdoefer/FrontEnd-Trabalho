@@ -120,8 +120,8 @@
             "password_": this.Password 
         })
         .then(response => {
-            alert("Login feito");
-            localStorage.setItem('id', JSON.stringify(response.data.webtoken));
+            alert(response.data.webtoken);
+            localStorage.setItem('id', response.data.webtoken);
             alert(localStorage.getItem('id'));
         })
         .catch(error => {

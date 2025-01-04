@@ -10,7 +10,7 @@
       tile
     >
       <h1 class="text-h5 font-weight-bold mb-4">Novos Dados</h1>
-      <v-form fast-fail @submit.prevent="updateUser(1)">
+      <v-form fast-fail @submit.prevent="updateUser">
         <v-text-field
           v-model="username_"
           :rules="UsernameRules"
@@ -36,10 +36,12 @@
       <v-col cols="6">
         <v-card
           title="Meus Tópicos"
-          subtitle="Tópicos de Heisdoffer487"
           class="mb-4"
           height="65%"
         >
+          <template v-slot:subtitle>
+              <span class="margin-lefter">{{ username }}</span>
+          </template>
           <v-card-text>
             Neste espaço, você pode ajustar as informações da sua conta de forma rápida e prática. Explore todos os tópicos que você criou, verifique detalhes importantes ou até mesmo corrija algo que não ficou como desejado. Nosso objetivo é garantir que você tenha total controle sobre sua experiência e que gerenciar seus conteúdos seja algo simples e intuitivo. Sinta-se à vontade para personalizar e manter tudo do seu jeito!
           </v-card-text>
@@ -58,7 +60,7 @@
             </template>
 
             <template v-slot:subtitle>
-              <span class="margin-lefter">Heisdoffer487</span>
+              <span class="margin-lefter">{{ username }}</span>
             </template>
 
             <v-card-text class="bg-surface-light pt-4">
@@ -68,7 +70,7 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-btn color="red" block @click="removeUser(1)">Remover Usuário</v-btn>
+  <v-btn color="red" block @click="removeUser">Remover Usuário</v-btn>
 </template>
 
 
@@ -78,6 +80,9 @@
         name: 'v-manage',
         data() {
             return {
+            token: localStorage.getItem('id'),
+            user: null,
+            username: '',
             username_: '',  
             email_: '',  
             UsernameRules: [
@@ -89,38 +94,62 @@
             }
         },
         methods: {
-                removeUser(index) {
-                  axios.delete(`/User/RemoveUser/${index}`, {
+                removeUser() {
+                  axios.delete(`/User/RemoveUser/${this.$route.params.id}`, {
                     headers: {
-                      Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTczNTg3NjMxOX0.vi0n5SzCHU4mNdgQDt_R7LnVRpL2IEDJC6Gl_jSt0OU'
+                      Authorization: `${this.token}`
                     }
                   })
                   .then(response => {
-                    alert('User removed successfully:', response.data);
                   })
                   .catch(error => {
                     alert('Error removing user:', error);
                   });
                 },
-                updateUser(index){
-                  const request = axios.put(`/User/UpdateUser/${index}`, {
+                updateUser(){
+                  const request = axios.put(`/User/UpdateUser/${this.$route.params.id}`, {
                   username_: this.username_,
                   email_: this.email_
                   }, {
                     headers: {
-                      Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsImlhdCI6MTczNTg3NjUzOX0.EMe4Oqu-epxtmIx7nGi13L6cOCRTiLgSmUENOEzI9w8'
+                      Authorization: `${this.token}`
                   }
                   })
                   .then(response => {
-                    alert('User edited successfully:', response);
                   })
                   .catch(error => {
                     alert('Error editing user:', error)
                   })
-                }
+                },
 
+                initializeUser(){
+                  const token = localStorage.getItem('id');
+                  const userId = this.$route.params.id;
+                  if (!token) {
+                    alert('Token de autenticação não encontrado.');
+                    return;
+                  }
+
+                  axios.post(`User/AcessUser/${userId}`, {"id": userId},{
+                    headers: {
+                      Authorization: `${token}`, 
+                    }
+                 })
+                 .then(response => {
+                    this.user = response.data; 
+                    this.username = this.user.username; 
+                      })
+                    .catch(error => {
+                      alert('Erro ao obter os dados do usuário:', error);
+                    });
+                    },
+                },
+                mounted() {
+                  this.initializeUser();
+               
+              }
         }
-    } 
+    
 </script>
 
 <style>

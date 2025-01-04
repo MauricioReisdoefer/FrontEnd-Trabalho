@@ -11,7 +11,7 @@ const routes = [
   { path: '/', component: Home, name: "home" },
   { path: '/topics', component: Topics, name: 'topics' },
   { path: '/createTopic', component: CreateTopic, name: 'createTopic'},
-  { path: '/manage', component: ManageAccount, name: 'manageAccount'},
+  { path: '/manage/:id', component: ManageAccount, name: 'manageAccount'},
   { path: '/regslog', component: regsLog, name: 'regsLog'},
   {
     path: '/acessTopic/:id',

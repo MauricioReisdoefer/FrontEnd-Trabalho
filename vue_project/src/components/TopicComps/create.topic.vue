@@ -45,6 +45,7 @@ export default {
   name: 'v-create-topic',
   data() {
     return {
+      token: localStorage.getItem('id'),
       TopicTitle: '',
       TopicDescription: '',
       formValid: false,
@@ -60,20 +61,16 @@ export default {
   },
   methods: {
   submitForm() {
-    axios.post(`/Topic/CreateTopic`, {
+    alert(this.token)
+    axios.post(`/Topic/CreateTopic`, 
+    {
         title_: this.TopicTitle,
         text_: this.TopicDescription
         }, {
           headers: {
-            Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImlhdCI6MTczNTkyNTIzNH0.6MvccqdVQJJ3ODe1FghZV8OtnbbsM85YQ966Ytdw_Jg'
+            Authorization: this.token
         }
-        })
-        .then(response => {
-          alert('Topic Created', response);
-        })
-        .catch(error => {
-          alert('Fuck me', error)
-        })
+      })
       }
   }
 }
