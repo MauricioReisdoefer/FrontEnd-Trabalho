@@ -45,7 +45,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn small color="primary" class="rounded-0">Ver</v-btn>
-              <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ getTopicAutor( topic.user_id ) }}</v-list-item-subtitle>
+              <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ getTopicAutor(topic.user_id) }}</v-list-item-subtitle>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -62,32 +62,37 @@ export default {
   data() {
     return {
       topics: [], // Inicializa com um array vazio
+      topic: [],
+      username: ''
     };
   },
   methods: {
     viewTopic(topicId) {
-      this.$router.push(`/topic/${topicId}`);
+      this.$router.push(`/acessTopic/${topicId}`);
     },
     getAllTopics() {
       axios
         .get("Topic/AllTopics")
         .then((response) => {
           this.topics = response.data;
-          axios.get(`User/GetUser/${index}`)
-          .then((response2) => {
-            this.topics.user_id = response2.username
           })
           .catch(error =>{
             alert("Não existe dono")
           })
-            })
         .catch((error) => {
           console.error("Erro ao carregar tópicos:", error);
         });
     },
 
     getTopicAutor(index){
-      
+      axios.get(`User/GetUser/${index}`)
+      .then(response =>{
+        alert(response.data.username)
+        return response.data.username
+      })
+      .catch(err =>{
+        console.log(err)
+      }) 
     }
   },
   mounted() {
