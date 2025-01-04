@@ -59,7 +59,7 @@
       tile
     >
       <h1 class="text-h5 font-weight-bold mb-4">Entrar na Conta</h1>
-      <v-form fast-fail @submit.prevent>
+      <v-form fast-fail @submit.prevent="loginUser">
         <v-text-field
           v-model="Username"
           :rules="UsernameRules"
@@ -94,19 +94,40 @@
         password_: '',
         email_: '',
         passwordConf_: '',
+        Username: '',
+        Password: ''
       }
     },
 
     methods: {
       createUser(){
-          axios.post('/User/CreateUser', this.formData)
+          axios.post('/User/CreateUser', {
+            "username_": this.username_,
+            "password_": this.password_,
+            "email_" : this.email_
+          })
           .then(response =>{
             alert('Foi')
           })
           .catch(error =>{
             alert('Não foi')
           })
-      }
+      },
+
+      loginUser() {
+        axios.post('/User/UserLogin', {
+            "username_": this.Username, 
+            "password_": this.Password 
+        })
+        .then(response => {
+            alert("Login feito");
+            localStorage.setItem('id', JSON.stringify(response.data.webtoken));
+            alert(localStorage.getItem('id'));
+        })
+        .catch(error => {
+            alert("Não foi");
+        });
+    } 
     },
     data() {
       return {
