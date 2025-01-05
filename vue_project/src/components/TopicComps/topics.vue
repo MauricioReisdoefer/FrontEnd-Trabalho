@@ -45,7 +45,8 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn small color="primary" class="rounded-0">Ver</v-btn>
-              <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ getTopicAutor(topic.user_id) }}</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="loading">CARREGANDO</v-list-item-subtitle>
+              <v-list-item-subtitle v-else class="text-body-2 ml-2">Autor: {{ username }}</v-list-item-subtitle>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -63,6 +64,7 @@ export default {
     return {
       topics: [], // Inicializa com um array vazio
       topic: [],
+      loading: true,
       username: ''
     };
   },
@@ -85,9 +87,12 @@ export default {
     },
 
     getTopicAutor(index){
+      this.loading = true;
+      const that = this.
       axios.get(`User/GetUser/${index}`)
       .then(response =>{
-        alert(response.data.username)
+        that.loading = false;
+        that.username = response.data.username;
         return response.data.username
       })
       .catch(err =>{
