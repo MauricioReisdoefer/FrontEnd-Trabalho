@@ -61,7 +61,7 @@
           </v-list-item-title>
           <v-list-item-text class="text-body-2">{{ post.text }}</v-list-item-text>
         </v-list-item-content>
-        <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ post.author }}</v-list-item-subtitle>
+        <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ post.user.username }}</v-list-item-subtitle>
       </v-list-item>
     </v-list>
   </v-container>

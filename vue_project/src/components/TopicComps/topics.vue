@@ -45,8 +45,7 @@
             </v-list-item-content>
             <v-list-item-action>
               <v-btn small color="primary" class="rounded-0">Ver</v-btn>
-              <v-list-item-subtitle v-if="loading">CARREGANDO</v-list-item-subtitle>
-              <v-list-item-subtitle v-else class="text-body-2 ml-2">Autor: {{ username }}</v-list-item-subtitle>
+              <v-list-item-subtitle class="text-body-2 ml-2">Autor: {{ topic.user.username }}</v-list-item-subtitle>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -64,7 +63,6 @@ export default {
     return {
       topics: [], // Inicializa com um array vazio
       topic: [],
-      loading: true,
       username: ''
     };
   },
@@ -77,31 +75,15 @@ export default {
         .get("Topic/AllTopics")
         .then((response) => {
           this.topics = response.data;
-          })
-          .catch(error =>{
-            alert("Não existe dono")
-          })
+        })
         .catch((error) => {
           console.error("Erro ao carregar tópicos:", error);
         });
     },
-
-    getTopicAutor(index){
-      this.loading = true;
-      const that = this.
-      axios.get(`User/GetUser/${index}`)
-      .then(response =>{
-        that.loading = false;
-        that.username = response.data.username;
-        return response.data.username
-      })
-      .catch(err =>{
-        console.log(err)
-      }) 
-    }
   },
   mounted() {
     this.getAllTopics(); // Chama a função ao montar o componente
+
   },
 };
 </script>
